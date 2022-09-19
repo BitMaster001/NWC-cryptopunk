@@ -49,7 +49,7 @@ const Collection: React.FC = () => {
   const [data, setData] = useState<Array<TokenData>>([]);
 
   const fetchMore = () => {
-    fetch(`https://deep-index.moralis.io/api/v2/nft/${CONTRACT_ADDRESS}?chain=${CHAIN_NAME}&format=decimal&limit=12&cursor=${cursor}`, options)
+    fetch(`https://deep-index.moralis.io/api/v2/nft/${CONTRACT_ADDRESS}?chain=${CHAIN_NAME}&format=decimal&limit=15&${cursor.length > 0 ? "cursor=" + cursor : ""}}`, options)
       .then(res => res.json())
       .then((res: MoralisResponse) => {
         setCursor(res.cursor);
@@ -86,7 +86,7 @@ const Collection: React.FC = () => {
         padding: 20
       }}
     >
-      <Wrap px="1rem" spacing={4} justify="center">
+      <Wrap px="1rem" spacing={4}>
         {data.map((o) => (
           <WrapItem
             key={o.tokenId}
